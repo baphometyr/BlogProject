@@ -21,7 +21,7 @@ class Home(TimeStampedModel):
 
 class Suscribers(TimeStampedModel):
     """ Modelo para suscriptores """
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
 
     class Meta:
         verbose_name = 'Suscriptor'

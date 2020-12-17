@@ -6,8 +6,13 @@ app_name = "home_app"
 
 urlpatterns = [
     path(
-        'plantilla/', 
-        views.TestPlantilla.as_view(),
-        name='plantilla',
+        '', 
+        views.HomePageView.as_view(),
+        name='index',
     ),  
+    path(
+        'register-suscription',
+        views.SuscribersCreateView.as_view(),
+        name='register_suscription'
+    ),
 ]
