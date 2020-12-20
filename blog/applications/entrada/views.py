@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 # Models
 from .models import Entry, Category
 
@@ -21,3 +21,8 @@ class EntryListView(ListView):
         result = Entry.objects.buscar(kword, categoria)
         return result
     
+
+class EntryDetailView(DetailView):
+    model = Entry
+    context_object_name = 'entrada'
+    template_name = "entrada/detail.html"
