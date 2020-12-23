@@ -4,6 +4,8 @@ from django.conf import settings
 from applications.entrada.models import Entry
 # apps terceros
 from model_utils.models import TimeStampedModel
+# Managers
+from .managers import FavoritesManager
 
 class Favorites(TimeStampedModel):
     """ Modelo para favoritos """
@@ -11,6 +13,8 @@ class Favorites(TimeStampedModel):
     # Llaves foraneas
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_favorites', on_delete=models.CASCADE)
     entry = models.ForeignKey(Entry, related_name='entry_favorites', on_delete=models.CASCADE)
+    # manager
+    objects = FavoritesManager()
 
     class Meta:
         unique_together = ('user', 'entry')

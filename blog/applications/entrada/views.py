@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 # Models
 from .models import Entry, Category
+from applications.favorito.models import Favorites
 
 class EntryListView(ListView):
     template_name = "entrada/lista.html"
@@ -26,3 +27,5 @@ class EntryDetailView(DetailView):
     model = Entry
     context_object_name = 'entrada'
     template_name = "entrada/detail.html"
+
+    

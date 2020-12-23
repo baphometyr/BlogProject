@@ -12,6 +12,7 @@ urlpatterns = [
     re_path('', include('applications.home.urls')),
     re_path('', include('applications.entrada.urls')),
     re_path('', include('applications.users.urls')),
+    re_path('', include('applications.favorito.urls')),
     # urls ckeditor
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
