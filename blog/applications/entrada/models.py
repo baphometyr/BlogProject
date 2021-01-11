@@ -1,5 +1,10 @@
+# python
+from datetime import timedelta, datetime
+# django
 from django.db import models
 from django.conf import settings
+from django.template.defaultfilters import slugify
+from django.urls import reverse_lazy
 # apps teceros
 from model_utils.models import TimeStampedModel
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -45,6 +50,7 @@ class Entry(TimeStampedModel):
     image = models.ImageField('Imagen', upload_to='Entry')
     portada = models.BooleanField(default=False)
     in_home = models.BooleanField(default=False)
+    # slug
     slug = models.SlugField(editable=False, max_length=300)
     # manager
     objects = EntryManager()
@@ -55,3 +61,22 @@ class Entry(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        now = datetime.now()
+        total_time = timedelta(
+            hours = now.hour,
+            minutes = now.minute,
+            seconds = now.second
+        )
+
+        seconds = int(total_time.total_seconds())
+
+        slug = f"{self.title}-{seconds}"
+        self.slug = slugify(slug)
+
+        super(Entry, self).save(*args, **kwargs)
+    
+    def get_absolute_url(self):
+        return reverse_lazy("entrada_app:entry_detail", kwargs={"slug": self.slug})
+    

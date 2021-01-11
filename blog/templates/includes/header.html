@@ -16,8 +16,12 @@
                 <li>
                     <a href="{% url 'entrada_app:entry_lista' %}">Blog</a>
                 </li>
-                <li>
-                    <a href="{% url 'users_app:user-login' %}" class="success button">Acceder</a>
+                <li>    
+                    {% if user.is_anonymous %}
+                        <a href="{% url 'users_app:user-login' %}" class="success button">Acceder</a>
+                    {% else %}
+                        <a href="{% url 'favorite_app:favoritos' %}" class="success button">Perfil</a>
+                    {% endif %}
                 </li>
                 
             </ul>
